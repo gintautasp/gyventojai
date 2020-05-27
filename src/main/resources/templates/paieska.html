@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Paieska</title>
+	<meta charset="utf-8">
+	<style>
+		table {
+		  border-collapse: collapse;
+		}
+
+		table, td, th {
+		  border: 1px solid black;
+		}
+	</style>
+	<script 
+		src="https://code.jquery.com/jquery-3.4.1.min.js"
+		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+		crossorigin="anonymous">
+	</script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script th:inline="javascript">
+	$( document ).ready( function() {
+		alert("case too_intimate_theme: \n actions_to_take = panic/(scream_loudly + insult_others); \n break;");
+		$( "#veiksmas" ).button().on( "click", function() {
+
+			$( "#veiksmas" ).val ( "ieskoti" );
+			$( "#paieskos_forma" ).submit();
+		});
+	});
+</script>
+</head>
+<body>
+<h1>Gyventojai</h1>
+<div id="criteria">
+	<form id="paieskos_forma" method="POST">
+		<fieldset>
+			<label for="salis">salis</label>
+			<select name="salis_id" id="salis_id" value="1">
+				<option value="0">visos</option>
+				<option value="1">Lietuva</option>
+				<option value="2">UK</option>
+				<option value="3">Lenkija</option>
+				<option value="4">Japonija</option>
+				<option value="5">Kinija</option>	
+			</select><br>
+			<input type="checkbox" name="pagal_lyti" id="pagal_lyti" value="1" checked>
+			<label for="pagal_lyti">skirstyti pagal lyti</label><br>
+			<input type="checkbox" name="pagal_gyv_mieste" id="pagal_gyv_mieste" value="1" checked>
+			<label for="pagal_lyti">skirstyti pagal gyv. mieste</label><br>
+			<input type="checkbox" name="pagal_salis" id="pagal_salis" value="1" checked>
+			<label for="pagal_lyti">sumuoti pagal salis</label><br>
+			<label for="amziu_ribos">Amziu ribos</label>
+			<select name="amz_ribos" id="amz_ribos" value="5">
+				<option value="0">be ribu</option>
+				<option value="5" selected>5m.</option>
+				<option value="10">10m.</option>
+				<option value="20">20m</option>
+				<option value="30">30m</option>
+				<option value="50">50m.</option>	
+			</select><br><br>
+			<input type="submit" name="veiksmas" id="veiksmas" value="ieskoti" tabindex="-1">
+		</fieldset>
+	</form>
+</div>
+	Stulpelių kiekis <span th:text="${stulp_kiekis}"></span>
+	<table>
+		<tr>
+			<th th:each = "sarasas_stulp : ${stulp_pavadinimai}" th:text="${sarasas_stulp}"> 
+			</th>
+		</tr>
+		<tr th:each="sarasas : ${lst_gyv_duomenu}">
+			<td th:each="index:${#numbers.sequence(0,stulp_kiekis-2)}" th:text="${sarasas[index]}"></td>
+		</tr>
+	</table>
+	
+	<div id="duomenysHTML">
+	jau baigia nusibosti
+	</div>
+
+</body>
+</html>
